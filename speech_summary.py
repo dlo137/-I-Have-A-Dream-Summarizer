@@ -15,3 +15,6 @@ def main():
     soup = bs4.BeautifulSoup(page.text, 'html.parser')
     p_elements = soup.select('p')
     speech = ''.join(p_elements)
+    
+    #PREP FOR REMOVING TYPOS & ETC...
+    speech = speech.replace(')mowing', 'knowing')
