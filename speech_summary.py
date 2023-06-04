@@ -15,6 +15,9 @@ def main():
     soup = bs4.BeautifulSoup(page.text, 'html.parser')
     p_elements = soup.select('p')
     speech = ''.join(p_elements)
-    
-    #PREP FOR REMOVING TYPOS & ETC...
+
+    #REMOVE PUNCTUATION, NUMBERS, & TYPOS
     speech = speech.replace(')mowing', 'knowing')
+    speech = re.sub('\s+', '', speech)
+    speech_edit = re.sub('[^a-zA-Z','', speech)
+    speech_edit = re.sub('\s+', '', speech_edit)
