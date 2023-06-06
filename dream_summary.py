@@ -13,8 +13,8 @@ def main():
 
     # SCAN AND JOIN PARAGRAPH ELEMENTS
     soup = bs4.BeautifulSoup(page.text, 'html.parser')
-    p_elements = soup.select('p')
-    speech = ''.join(p_elements)
+    p_elems = soup.select('p')
+    speech = ''.join(p_elems)
 
     # REMOVING PUNCTUATIONS, NUMBERS, & TYPOS
     speech = speech.replace(')mowing', 'knowing')
@@ -63,9 +63,24 @@ def main():
 
     # SCORING SENTENCES
     def score_sentences(speech, word_freq, max_words):
-        sent_scores
+        # return dictionary of sentence scores based on word frequency
+        sent_scores = dict()
+        # tokenizing speech by sentences
+        sentences = nltk.sent_tokenize(speech)
+        # loop sentences to calculate scores, normalize sent by words /sentence, & meet max words restraint
+        for sent in sentences:
+            sent_scores[sent] = 0
+            words = nltk.word_tokenize(sent.lower())
+            sent_word_count = len(words)
+            if sent_word_count <= int(max_words):
+                for word in words:
+                    if word in word_freq():
+                        sent_scores[sent] += word_freq[word]
+                    sent_scores[sent] = sent_scores[sent] / sent_word_count
+                return sent_scores
 
-
+if __name__ == '__main__':
+    main()
 
 
 
